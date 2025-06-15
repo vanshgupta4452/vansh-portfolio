@@ -81,7 +81,7 @@ export function ProjectsSection() {
       description:
         "This project aims to develop a comprehensive ROS2 simulation package tailored for a differential drive robot.This repository shows how to set up a localization system using a GPS sensor(s) as the source of global positioning, robot_localization (RL) for sensor fusion, and how to use Nav2 to follow GPS waypoints.",
       tags: ["ROS2", "Nav2", "SLAM", "AMCL"],
-      image: "../gps_nav.png",
+      image: "/gps_nav.png",
       githubUrl: "https://github.com/vanshgupta4452/GPS-NAV",
   
     },
@@ -90,7 +90,7 @@ export function ProjectsSection() {
       description:
         "The e-Yantra Logistic coBot theme focuses on autonomous warehouse robotics using ROS 2, integrating ArUco-based object detection, robotic arm manipulation with MoveIt, and mobile robot navigation with SLAM and Nav2 for efficient package handling and docking.",
       tags: ["ROS2", "Python", " NAV2", "MoveIt2", "OpenCV"],
-      image: "../eyrc.png",
+      image: "/eyrc.png",
       githubUrl: "../eyrc.png",
     },
     {
@@ -98,7 +98,7 @@ export function ProjectsSection() {
       description:
         "Designed and developed a 4-wheel omnidrive robot capable of moving in any direction using mecanum wheels. Integrated with ROS 2 for real-time control, SLAM, and navigation, enabling precise omnidirectional movement, autonomous path planning, and environment mapping in simulation and real-world scenarios.",
       tags: ["ROS2", "Fusion 360", "NAV2", "SLAM"],
-      image: "../omni.png",
+      image: "/omni.png",
       githubUrl: "https://github.com/vanshgupta4452/omnidrive",
     },
     {
@@ -106,7 +106,7 @@ export function ProjectsSection() {
       description:
         "Developed Irri-great, a smart irrigation control system that monitors real-time soil moisture and uses weather forecasts to predict future water needs of crops. The system optimizes irrigation schedules to conserve water, improve crop health, and prevent overwatering by integrating sensor data with intelligent forecasting.",
       tags: ["ReactJS", "Arduino", "C++", "Micro-ROS"],
-      image: "../sih.png",
+      image: "/sih.png",
       githubUrl: "https://github.com/vanshgupta4452/Irri-Great",
       
     },
