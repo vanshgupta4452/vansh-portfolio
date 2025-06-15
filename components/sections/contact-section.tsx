@@ -1,64 +1,18 @@
 "use client"
 
 import type React from "react"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { RobotArm } from "@/components/ui/robot-arm"
-import { Send, Loader2, CheckCircle } from "lucide-react"
+import { Send } from "lucide-react"
 
 export function ContactSection() {
   const ref = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setIsSubmitting(true)
-
-  try {
-    const res = await fetch("/api/sendMail", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formState),
-    })
-    
-    
-
-    if (!res.ok){ 
-      
-   
-
-      throw new Error("Failed to send")}
-
-    setIsSubmitted(true)
-    setFormState({ name: "", email: "", message: "" })
-  } catch (error) {
-    alert("Error sending message.")
-    console.error(error)
-  } finally {
-    setIsSubmitting(false)
-    setTimeout(() => setIsSubmitted(false), 3000)
-  }
-}
 
   return (
     <section id="contact" ref={ref} className="py-20 relative">
@@ -88,14 +42,9 @@ const handleSubmit = async (e: React.FormEvent) => {
             <div className="tech-panel p-6 relative overflow-hidden">
               <h3 className="text-xl font-semibold mb-4 text-accent">Get In Touch</h3>
               <div className="space-y-4 text-muted-foreground">
-                <p>I'm currently available for freelance work, collaborations, and interesting robotics projects.</p>
-                <p>
-                  Whether you have a question about my work, a project proposal, or just want to say hello, I'll try my
-                  best to get back to you!
-                </p>
-               
+                <p>I’m currently available for freelance work, collaborations, and interesting robotics projects.</p>
+                <p>Whether you have a question about my work or just want to say hello, I’ll get back to you!</p>
               </div>
-
               <div className="absolute -bottom-20 -right-20 opacity-10">
                 <RobotArm className="w-64 h-64" animate={false} />
               </div>
@@ -107,7 +56,17 @@ const handleSubmit = async (e: React.FormEvent) => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <form
+              ref={formRef}
+              action="https://formsubmit.co/vansh4452@gmail.com" 
+              method="POST"
+              className="space-y-4"
+            >
+              {/* Prevent spam bots */}
+              <input type="hidden" name="_honey" style={{ display: "none" }} />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value="https://vanshgupta4452.github.io/vansh-portfolio/#contact" />
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-1">
                   Name
@@ -115,8 +74,6 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <Input
                   id="name"
                   name="name"
-                  value={formState.name}
-                  onChange={handleChange}
                   placeholder="Your name"
                   required
                   className="bg-background/50 border-accent/20 focus:border-accent"
@@ -131,8 +88,6 @@ const handleSubmit = async (e: React.FormEvent) => {
                   id="email"
                   name="email"
                   type="email"
-                  value={formState.email}
-                  onChange={handleChange}
                   placeholder="your.email@example.com"
                   required
                   className="bg-background/50 border-accent/20 focus:border-accent"
@@ -146,35 +101,15 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <Textarea
                   id="message"
                   name="message"
-                  value={formState.message}
-                  onChange={handleChange}
                   placeholder="Your message"
                   required
                   className="min-h-[120px] bg-background/50 border-accent/20 focus:border-accent"
                 />
               </div>
 
-              <Button
-                type="submit"
-                disabled={isSubmitting || isSubmitted}
-                className="w-full bg-accent hover:bg-accent/80 text-black"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : isSubmitted ? (
-                  <>
-                    <CheckCircle className="mr-2 h-4 w-4" />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
-                  </>
-                )}
+              <Button type="submit" className="w-full bg-accent hover:bg-accent/80 text-black">
+                <Send className="mr-2 h-4 w-4" />
+                Send Message
               </Button>
             </form>
           </motion.div>
