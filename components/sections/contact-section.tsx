@@ -31,15 +31,20 @@ export function ContactSection() {
     setIsSubmitting(true)
 
     try {
-      const formPayload = new FormData()
-      formPayload.append("name", formData.name)
-      formPayload.append("email", formData.email)
-      formPayload.append("message", formData.message)
-      formPayload.append("_captcha", "false")
-
       const res = await fetch("https://formsubmit.co/ajax/vansh4452@gmail.com", {
         method: "POST",
-        body: formPayload,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _captcha: "false",
+          _template: "box",
+          _subject: "New message from portfolio site",
+        }),
       })
 
       if (!res.ok) throw new Error("Failed to send form")
@@ -123,7 +128,7 @@ export function ContactSection() {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="vansh4452@gmail.com"
+                  placeholder="Your Email"
                   required
                   className="bg-background/50 border-accent/20 focus:border-accent"
                 />
