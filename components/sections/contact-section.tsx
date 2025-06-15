@@ -1,18 +1,59 @@
 "use client"
 
 import type React from "react"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { RobotArm } from "@/components/ui/robot-arm"
-import { Send } from "lucide-react"
+import { Send, CheckCircle, Loader2 } from "lucide-react"
 
 export function ContactSection() {
   const ref = useRef<HTMLDivElement>(null)
-  const formRef = useRef<HTMLFormElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const formPayload = new FormData()
+      formPayload.append("name", formData.name)
+      formPayload.append("email", formData.email)
+      formPayload.append("message", formData.message)
+      formPayload.append("_captcha", "false")
+
+      const res = await fetch("https://formsubmit.co/ajax/vansh4452@gmail.com", {
+        method: "POST",
+        body: formPayload,
+      })
+
+      if (!res.ok) throw new Error("Failed to send form")
+
+      setIsSubmitted(true)
+      setFormData({ name: "", email: "", message: "" })
+    } catch (error) {
+      alert("❌ Failed to send message.")
+      console.error(error)
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(() => setIsSubmitted(false), 3000)
+    }
+  }
 
   return (
     <section id="contact" ref={ref} className="py-20 relative">
@@ -56,17 +97,7 @@ export function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <form
-              ref={formRef}
-              action="https://formsubmit.co/vansh4452@gmail.com" 
-              method="POST"
-              className="space-y-4"
-            >
-              {/* Prevent spam bots */}
-              <input type="hidden" name="_honey" style={{ display: "none" }} />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value="https://vanshgupta4452.github.io/vansh-portfolio/#contact" />
-
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-1">
                   Name
@@ -74,6 +105,8 @@ export function ContactSection() {
                 <Input
                   id="name"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Your name"
                   required
                   className="bg-background/50 border-accent/20 focus:border-accent"
@@ -88,7 +121,9 @@ export function ContactSection() {
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="your.email@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="vansh4452@gmail.com"
                   required
                   className="bg-background/50 border-accent/20 focus:border-accent"
                 />
@@ -101,15 +136,31 @@ export function ContactSection() {
                 <Textarea
                   id="message"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Your message"
                   required
                   className="min-h-[120px] bg-background/50 border-accent/20 focus:border-accent"
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-accent hover:bg-accent/80 text-black">
-                <Send className="mr-2 h-4 w-4" />
-                Send Message
+              <Button type="submit" disabled={isSubmitting} className="w-full bg-accent hover:bg-accent/80 text-black">
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : isSubmitted ? (
+                  <>
+                    <CheckCircle className="mr-2 h-4 w-4" />
+                    Sent!
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-4 w-4" />
+                    Send Message
+                  </>
+                )}
               </Button>
             </form>
           </motion.div>
