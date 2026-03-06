@@ -31,12 +31,12 @@ const ContactSection = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-sm">
               <Mail size={18} />
-              <span>vanshgupta4452@gmail.com</span>
+              <span>vansh4452@gmail.com</span>
             </div>
 
             <div className="flex items-center gap-3 text-sm">
               <Phone size={18} />
-              <span>+91 XXXXX XXXXX</span>
+              <span>+91 7015366048</span>
             </div>
 
             <div className="flex items-center gap-3 text-sm">
