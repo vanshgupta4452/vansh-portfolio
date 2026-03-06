@@ -4,18 +4,18 @@ const experiences = [
   {
     role: "Robotics Software Intern",
     company: "Ardee Yantrik",
-    period: "June 2025 – Present",
+    period: "June 2025 – September 2025",
     description:
       "Developing robotics software solutions, working on embedded systems and autonomous navigation algorithms.",
-    tags: ["ROS", "Python", "Embedded Systems"],
+    tags: ["ROS2", "Python", "C++","Robotic Arm","Collision Detection"],
   },
   {
     role: "Admin",
     company: "Atom Robotics Lab",
     period: "2023 – Present",
     description:
-      "Leading and managing robotics lab operations, mentoring juniors, and coordinating projects and workshops.",
-    tags: ["Leadership", "Robotics", "Mentorship"],
+      "Active member of the college robotics society, collaborating with team members on robotics projects and participating in various technical competitions and events.",
+    tags: [],
   },
 ];
 

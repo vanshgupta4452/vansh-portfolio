@@ -14,24 +14,29 @@ const AboutSection = () => {
           <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Who I Am</h3>
 
           <div className="grid md:grid-cols-3 gap-8">
+          
             <div className="md:col-span-2">
               <p className="text-muted-foreground leading-relaxed text-base mb-6">
-                I'm a developer passionate about building intelligent robots and dynamic web applications 
-                that bridge the gap between physical systems and digital experiences. My favorite work lives 
-                at the intersection of hardware and software, where I can combine precise engineering with 
-                creative problem-solving.
+                I'm a robotics developer passionate about building intelligent robotic systems and 
+                autonomous machines. My work focuses on combining software, hardware, and algorithms 
+                to create robots capable of perceiving, navigating, and interacting with the real world.
               </p>
+
               <p className="text-muted-foreground leading-relaxed text-base mb-6">
-                Currently pursuing my B.Tech and actively contributing to robotics projects at the 
-                MAIT Robotics Society. I specialize in <span className="text-foreground font-medium">ROS/ROS2, Gazebo, RViz, and MoveIt</span> for 
-                robotic simulation and control, alongside full-stack web development using the MERN stack.
+                Currently pursuing my B.Tech at <span className="text-foreground font-medium">Maharaja Agrasen Institute of Technology (MAIT)</span>, 
+                I actively collaborate with the college robotics society on robotics projects and technical competitions. 
+                I specialize in <span className="text-foreground font-medium">ROS2, Nav2, SLAM, Gazebo, RViz, and MoveIt2</span> 
+                for robotic simulation, navigation, and manipulation.
               </p>
+
               <p className="text-muted-foreground leading-relaxed text-base">
-                I've participated in hackathons and competitions, earning recognition at events like 
-                Vihaan 07 and CodeClash. In my spare time, I'm usually experimenting with new tech, 
-                exploring robot control algorithms, or designing UI components.
+                I enjoy building complete robotic systems—from designing hardware and integrating sensors 
+                to developing perception, navigation, and control algorithms. Alongside robotics, I also 
+                work on <span className="text-foreground font-medium">full-stack web development using the MERN stack</span> 
+                to build modern web applications and dashboards.
               </p>
             </div>
+
 
             <div className="space-y-4">
               {[
