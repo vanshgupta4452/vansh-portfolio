@@ -1,61 +1,26 @@
 import { motion } from "framer-motion";
 
-const AboutSection = () => {
-  return (
-    <section id="about" className="py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="font-mono text-sm text-primary mb-3 tracking-wider uppercase">About</h2>
-          <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Who I Am</h3>
-
-          <div className="grid md:grid-cols-3 gap-8">
-          
-            <div className="md:col-span-2">
-              <p className="text-muted-foreground leading-relaxed text-base mb-6">
-                I'm a robotics developer passionate about building intelligent robotic systems and 
-                autonomous machines. My work focuses on combining software, hardware, and algorithms 
-                to create robots capable of perceiving, navigating, and interacting with the real world.
-              </p>
-
-              <p className="text-muted-foreground leading-relaxed text-base mb-6">
-                Currently pursuing my B.Tech at <span className="text-foreground font-medium">Maharaja Agrasen Institute of Technology (MAIT)</span>, 
-                I actively collaborate with the college robotics society on robotics projects and technical competitions. 
-                I specialize in <span className="text-foreground font-medium">ROS2, Nav2, SLAM, Gazebo, RViz, and MoveIt2</span> 
-                for robotic simulation, navigation, and manipulation.
-              </p>
-
-              <p className="text-muted-foreground leading-relaxed text-base">
-                I enjoy building complete robotic systems—from designing hardware and integrating sensors 
-                to developing perception, navigation, and control algorithms. Alongside robotics, I also 
-                work on <span className="text-foreground font-medium">full-stack web development using the MERN stack</span> 
-                to build modern web applications and dashboards.
-              </p>
-            </div>
-
-
-            <div className="space-y-4">
-              {[
-                { label: "Location", value: "India" },
-                { label: "Education", value: "B.Tech (MAIT)" },
-                { label: "Focus", value: "Robotics & Web Dev" },
-                { label: "Status", value: "Open to work" },
-              ].map((item) => (
-                <div key={item.label} className="p-4 rounded-xl bg-card border border-border">
-                  <p className="text-xs font-mono text-muted-foreground mb-1">{item.label}</p>
-                  <p className="text-sm font-semibold text-foreground">{item.value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+const AboutSection = () => <section id="about" className="px-6 py-24 md:px-10 md:py-32">
+  <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-24">
+    <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+      <p className="section-kicker mb-4">02 / The person behind the systems</p>
+      <h2 className="text-5xl font-bold leading-[.92] tracking-[-.07em] md:text-7xl">AI in the cloud.<br /><span className="text-primary">Robots</span> on<br />the ground.</h2>
+      <div className="mt-10 grid grid-cols-2 border-t border-foreground/20 pt-4">
+        <div><p className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">Studying</p><p className="mt-2 text-sm">B.Tech, IT · 7th semester</p></div>
+        <div><p className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">At</p><p className="mt-2 text-sm">MAIT · 2023—2027</p></div>
       </div>
-    </section>
-  );
-};
+    </motion.div>
+    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .1 }} className="flex flex-col justify-between">
+      <div className="max-w-2xl space-y-5 text-base leading-[1.8] text-muted-foreground md:text-lg">
+        <p>I’m a seventh-semester Information Technology student at Maharaja Agrasen Institute of Technology, Delhi. My work sits between AI systems that coordinate and retrieve information, and robots that sense and act in physical space.</p>
+        <p>From June to October 2026, I interned at NMG Technologies, contributing to multi-agent orchestration, agentic RAG, GraphRAG, and their backend infrastructure. Earlier, I built robotic-arm collision and kinematics systems at Ardee Yantrik.</p>
+        <p>I like the engineering underneath the demo: reliable APIs, useful evaluation, fast retrieval, clean control loops, and the small details that make a complicated system easier to trust.</p>
+      </div>
+      <div className="mt-10 grid grid-cols-2 border-t border-foreground/20 pt-5 md:grid-cols-4">
+        {["Agentic AI", "Retrieval", "Robotics", "Full-stack"].map((item, i) => <div key={item} className="border-l border-foreground/20 py-2 pl-3 first:border-0 first:pl-0"><span className="font-mono text-[9px] text-primary">0{i + 1}</span><p className="mt-1 text-xs uppercase tracking-wider">{item}</p></div>)}
+      </div>
+    </motion.div>
+  </div>
+</section>;
 
 export default AboutSection;

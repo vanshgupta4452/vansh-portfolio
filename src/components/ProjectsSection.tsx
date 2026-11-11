@@ -1,166 +1,39 @@
-
-
-
-
 import { motion } from "framer-motion";
-import { Github } from "lucide-react";
-import { useState } from "react";
-
+import { ArrowUpRight, Github } from "lucide-react";
 import gpsNav from "@/assets/gps_nav.png";
 import eyrc from "@/assets/eyrc.png";
 import omni from "@/assets/omni.png";
-import sih from "@/assets/sih.png";
 import swarm from "@/assets/swarm.png";
 import mr from "@/assets/mr.png";
 
-
-  
-const projects = [
-  {
-    title: "MR Robot – Autonomous Mobile Robot",
-    description:
-      "Built an Autonomous Mobile Robot (AMR) capable of autonomous navigation in indoor environments using ROS2 Nav2. Implemented SLAM-based mapping, AMCL localization, and path planning for obstacle avoidance. Integrated multiple sensors and performed sensor fusion for reliable navigation while visualizing and testing the system in Gazebo and RViz.",
-    tags: ["ROS2", "Nav2", "SLAM", "AMCL", "Sensor Fusion", "Gazebo", "RViz", "RTOS","Micro ROS"],
-    image: mr,
-    github: "https://github.com/vanshgupta4452/mr_robot",
-  },
-  {
-    title: "Swarm Logistics Robot – eYRC 2026",
-    description:
-      "Built a swarm robotics system where multiple robots collaborate to pick and stack crates autonomously. Designed robot hardware using Fusion 360 and 3D printing, integrated ESP32-based control with MQTT communication, and developed perception and coordination algorithms using ROS2, Python, and OpenCV.",
-    tags: ["ROS2", "Python", "OpenCV", "ESP32", "MQTT", "Fusion 360", "3D Printing"],
-    image: swarm,
-    github: "https://github.com/vanshgupta4452/Eyantra-25-swarm-bots-",
-  },
-
-  {
-    title: "EYRC-2024",
-    description:
-      "Autonomous warehouse robotics using ROS 2, integrating ArUco-based object detection, robotic arm manipulation with MoveIt, and mobile robot navigation with SLAM and Nav2.",
-    tags: ["ROS2", "Python", "MoveIt2", "OpenCV"],
-    image: eyrc,
-    github: "https://github.com/vanshgupta4452/Eyantra",
-  },
-  {
-    title: "Omnidrive",
-    description:
-      "4-wheel omnidrive robot with omni wheels integrated with ROS 2 for real-time control, SLAM, and navigation enabling precise omnidirectional movement.",
-    tags: ["ROS2", "Fusion 360", "Nav2", "SLAM"],
-    image: omni,
-    github: "https://github.com/vanshgupta4452/omnidrive",
-  },
-  {
-    title: "Irri-Great",
-    description:
-      "Smart irrigation control system monitoring real-time soil moisture using weather forecasts to predict future water needs and optimize irrigation schedules.",
-    tags: ["ReactJS", "Arduino", "C++", "Micro-ROS"],
-    image: sih,
-    github: "https://github.com/vanshgupta4452/Irri-Great",
-  },
-  
-  {
-    title: "GPS NAV",
-    description:
-      "Comprehensive ROS2 simulation package for a differential drive robot with GPS-based localization, sensor fusion via robot_localization, and Nav2 waypoint following.",
-    tags: ["ROS2", "Nav2", "AMCL","Kalman Filter"],
-    image: gpsNav,
-    github: "https://github.com/vanshgupta4452/GPS-NAV",
-  },
-  
+const roboticsWork = [
+  { title: "Swarm robots", kind: "eYRC 2025–26 / Multi-agent robotics", detail: "Holonomic robots, ArUco-based localization, MQTT coordination, PID control, and behavior trees for autonomous task allocation.", image: swarm, link: "https://github.com/vanshgupta4452/Eyantra-25-swarm-bots-", tags: "ROS 2 · OpenCV · ESP32" },
+  { title: "MR Robot 2.0", kind: "Autonomous navigation / Hardware + software", detail: "A distributed robot: ROS 2 navigation on Raspberry Pi, real-time motor and sensor control on ESP32, linked with micro-ROS.", image: mr, link: "https://github.com/vanshgupta4452/mr_robot", tags: "ROS 2 · micro-ROS · FreeRTOS" },
+  { title: "Warehouse robotics", kind: "eYRC 2024 / Manipulation + navigation", detail: "ArUco object detection, a MoveIt-controlled arm, and mobile robot navigation through SLAM and Nav2.", image: eyrc, link: "https://github.com/vanshgupta4452/Eyantra", tags: "ROS 2 · MoveIt · OpenCV" },
+  { title: "GPS navigation", kind: "ROS 2 simulation / Localization", detail: "Differential-drive robot simulation using GPS localization, sensor fusion, and Nav2 waypoint following.", image: gpsNav, link: "https://github.com/vanshgupta4452/GPS-NAV", tags: "ROS 2 · Nav2 · Kalman filter" },
+  { title: "Omnidrive", kind: "Robot platform / Holonomic motion", detail: "A four-wheel omnidirectional base designed and integrated with ROS 2 for control, mapping, and navigation.", image: omni, link: "https://github.com/vanshgupta4452/omnidrive", tags: "ROS 2 · CAD · SLAM" },
 ];
 
+const ProjectsSection = () => <section id="projects" className="px-6 py-24 md:px-10 md:py-32">
+  <div className="mx-auto max-w-7xl">
+    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 flex items-end justify-between gap-8">
+      <div><p className="section-kicker mb-3">01 / Selected work</p><h2 className="text-5xl font-bold tracking-[-.06em] md:text-7xl">Selected projects<span className="text-primary">.</span></h2></div>
+      <p className="hidden max-w-xs text-sm leading-relaxed text-muted-foreground md:block">Software gets interesting when it can find an answer, coordinate a team, or move through the physical world.</p>
+    </motion.div>
 
-
-const ProjectsSection = () => {
-  const [showAll, setShowAll] = useState(false);
-
-  const visibleProjects = showAll ? projects : projects.slice(0, 4);
-
-  return (
-    <section id="projects" className="py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="font-mono text-sm text-primary mb-3 tracking-wider uppercase">
-            Projects
-          </h2>
-          <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-12">
-            Featured Work
-          </h3>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {visibleProjects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/30 transition-all duration-300"
-            >
-              <div className="aspect-video overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-xl font-bold text-foreground">
-                    {project.title}
-                  </h4>
-
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <Github size={18} />
-                  </a>
-                </div>
-
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-mono px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Show More Button */}
-        {projects.length > 4 && (
-          <div className="flex justify-center mt-10">
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="px-6 py-3 rounded-xl border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all"
-            >
-              {showAll ? "Show Less" : "Show More Projects"}
-            </button>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-};
+    <div className="flex items-end justify-between border-b border-foreground/20 pb-5"><div><p className="section-kicker mb-2">Robotics</p><h3 className="text-3xl font-semibold tracking-tight md:text-4xl">From sim to shop floor</h3></div><a href="https://github.com/vanshgupta4452" target="_blank" rel="noopener noreferrer" className="hidden items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary sm:flex">More on GitHub <Github size={15} /></a></div>
+    <div className="divide-y divide-foreground/15">
+      {roboticsWork.map((item, i) => <motion.a href={item.link} target="_blank" rel="noopener noreferrer" key={item.title} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: .45, delay: Math.min(i * .04, .16) }} className="project-row group grid gap-4 py-6 hover:bg-white/[.025] md:grid-cols-[38px_1fr_1.2fr_.9fr_175px_20px] md:items-center md:gap-5 md:py-7">
+        <span className="font-mono text-xs text-primary">0{i + 1}</span>
+        <div><p className="font-mono text-[9px] uppercase tracking-[.12em] text-muted-foreground">{item.kind}</p><h4 className="mt-1 text-xl font-semibold tracking-tight md:text-2xl">{item.title}</h4></div>
+        <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+        <div className="relative hidden aspect-[1.7] w-full overflow-hidden bg-[#151415] md:block"><img src={item.image} alt={`${item.title} project preview`} loading="lazy" className="h-full w-full object-contain opacity-75 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-100" /></div>
+        <motion.div initial={{ opacity: 0, y: 14, scale: .96 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-48px" }} transition={{ duration: .5, delay: Math.min(i * .04, .16), ease: [.22, 1, .36, 1] }} className="relative mt-1 aspect-[1.65] w-full overflow-hidden border border-foreground/10 bg-[#151415] md:hidden"><img src={item.image} alt={`${item.title} project preview`} loading="lazy" className="h-full w-full object-contain" /></motion.div>
+        <span className="flex flex-wrap gap-1.5 font-mono text-[9px] uppercase tracking-wider text-foreground/55">{item.tags.split(" · ").map((tag) => <span key={tag} className="border border-foreground/15 px-1.5 py-1">{tag}</span>)}</span>
+        <ArrowUpRight className="hidden text-primary transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 md:block" size={16} />
+      </motion.a>)}
+    </div>
+  </div>
+</section>;
 
 export default ProjectsSection;
